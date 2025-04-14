@@ -19,13 +19,15 @@
 - (IBAction)checkInput:(id)sender {
     NSString* inputString = _tfInput.text;
     
-    for(int i = 0 ; i < inputString.length ; i++) {
-        if( isnumber( [inputString characterAtIndex:i] ) ) {
-            _txtResult.text = @"Numeric";
-            return;
-        }
+    
+    NSNumberFormatter* formatter = [NSNumberFormatter new];
+    NSNumber* result = [formatter numberFromString:inputString];
+    
+    if(result == nil) {
+        _txtResult.text = @"String";
+    } else {
+        _txtResult.text = @"Numeric";
     }
-    _txtResult.text = @"String";
     
     
 }

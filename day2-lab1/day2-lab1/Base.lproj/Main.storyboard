@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController title="Home" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,10 +44,10 @@
             </objects>
             <point key="canvasLocation" x="1063.3587786259541" y="4.9295774647887329"/>
         </scene>
-        <!--Second View Controller-->
+        <!--Hello Screen-->
         <scene sceneID="Iib-Q3-fTH">
             <objects>
-                <viewController storyboardIdentifier="second" id="a1h-yj-Rop" customClass="SecondViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="second" title="Hello Screen" id="a1h-yj-Rop" customClass="SecondViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9uM-QA-Ou7">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,10 +80,10 @@
             </objects>
             <point key="canvasLocation" x="1890.8396946564885" y="4.9295774647887329"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Home-->
         <scene sceneID="VJB-a0-3Zb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dsN-eh-Af4" sceneMemberID="viewController">
+                <navigationController title="Home" automaticallyAdjustsScrollViewInsets="NO" id="dsN-eh-Af4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Ym-BT-aZL">
                         <rect key="frame" x="0.0" y="118" width="393" height="44"/>

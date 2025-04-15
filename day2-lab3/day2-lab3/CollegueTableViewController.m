@@ -11,8 +11,8 @@
 
 @interface CollegueTableViewController ()
 
-@property NSArray* males;
-@property NSArray* females;
+@property NSMutableArray* males;
+@property NSMutableArray* females;
 
 @end
 
@@ -20,18 +20,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _males = @[
+    NSArray* tempMale = @[
         [[Collegue alloc] initWithName:@"boody" andAge:22 andTitle:@"Android" andEmail:@"boody@gmail.com"],
         [[Collegue alloc] initWithName:@"Ahmed" andAge:44 andTitle:@"Teacher" andEmail:@"Ahmed@gmail.com"],
         [[Collegue alloc] initWithName:@"Hamdy" andAge:77 andTitle:@"NON" andEmail:@"Hamdddy@gmail.com"],
         
     ];
-    _females = @[
+    
+    NSArray* tempFemale = @[
         [[Collegue alloc] initWithName:@"Noha" andAge:22 andTitle:@"Android" andEmail:@"HOLKJL@gmail.com"],
         [[Collegue alloc] initWithName:@"Mona" andAge:12 andTitle:@"Student" andEmail: @"NON"],
         [[Collegue alloc] initWithName:@"Hamdy" andAge:77 andTitle:@"NON" andEmail:@"Hamdddy@gmail.com"],
         
     ];
+    
+    _males = [tempMale mutableCopy];
+    _females = [tempFemale mutableCopy];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -65,12 +69,46 @@
         case 0:
             return @"Males";
             break;
-            
+
         default:
             return @"Females";
             break;
     }
 }
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(editingStyle == UITableViewCellEditingStyleDelete) {
+        switch (indexPath.section) {
+            case 0:
+                [ _males removeObjectAtIndex:indexPath.row ];
+                [ tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:YES ];
+                break;
+                
+            default:
+                [ _females removeObjectAtIndex:indexPath.row ];
+                [ tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:YES ];
+                break;
+        }
+    } else if(editingStyle == UITableViewCellEditingStyleInsert) {
+        switch (indexPath.section) {
+            case 0:
+                [ _males addObject: [_males objectAtIndex:indexPath.row] ];
+                [ tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:YES ];
+                break;
+                
+            default:
+                
+                Collegue* female = [_females objectAtIndex: indexPath.row];
+                
+                [ _females addObject:female ];
+                [ tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:YES ];
+                break;
+        }
+    }
+    
+    
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Collegue* item = nil;
@@ -83,6 +121,7 @@
             item = [_females objectAtIndex: indexPath.row];
             break;
     }
+    
     NSLog(@"clicked on item: %@", item.name);
     ViewController* viewController = [ self.storyboard instantiateViewControllerWithIdentifier: @"details" ];
     

@@ -23,9 +23,24 @@
     _nameLabel.text = [NSString stringWithFormat:@"Hi, %@", _name];
     
     
+//    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//    self.navigationItem.rightBarButtonItem.title = @"Clear";
+//    self.navigationItem.rightBarButtonItem.action = @selector(backToHome:);
+    
+    UIBarButtonItem* clearBtn = [[UIBarButtonItem alloc] initWithTitle:@"Clear and back" style:UIBarButtonItemStylePlain target:self action:@selector(backToHome:)];
+    
+    self.navigationItem.rightBarButtonItem = clearBtn;
     
 }
+
+- (void) goback {
+    NSLog(@"goback");
+    [_ref clearText];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (IBAction)backToHome:(id)sender {
+    NSLog(@"back to home");
     [_ref clearText];
     [self.navigationController popViewControllerAnimated:YES];
     

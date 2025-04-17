@@ -12,6 +12,7 @@
 - (instancetype)initWithImagePath:(NSString *)path andLabel:(NSString *)label  {
     _imagePath = path;
     _label = label;
+    return self;
 }
 
 

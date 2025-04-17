@@ -1,32 +1,40 @@
 //
-//  ImagesTableViewController.m
-//  day4-lab2
+//  CatsTableViewController.m
+//  lab4-day2-2
 //
-//  Created by JETSMobileLabMini10 on 16/04/2025.
+//  Created by JETSMobileLabMini10 on 17/04/2025.
 //
 
-#import "ImagesTableViewController.h"
-#import "Item.h"
-#import "ImageTableViewCell.h"
+#import "CatsTableViewController.h"
+#import "Cat.h"
+#import <SDWebImage/SDWebImage.h>
 
-@interface ImagesTableViewController ()
+@interface CatsTableViewController ()
 
-@property NSArray* items;
+
+@property NSArray* cats;
 
 @end
 
-@implementation ImagesTableViewController
+@implementation CatsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"created the table view");
-    _items = [@[
-        [[Item alloc] initWithImagePath:@"image" andLabel:@"First"],
-        [[Item alloc] initWithImagePath:@"image" andLabel:@"First"],
-        [[Item alloc] initWithImagePath:@"image" andLabel:@"First"],
-        [[Item alloc] initWithImagePath:@"image" andLabel:@"First"],
-        [[Item alloc] initWithImagePath:@"image" andLabel:@"First"],
-    ] mutableCopy];
+    Cat* c1 = [Cat new];
+    c1.imagePath = @"cat2";
+    
+    Cat* c2 = [Cat new];
+    c2.imagePath = @"https://images.pexels.com/photos/416160/pexels-photo-416160.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+    
+    Cat* c3 = [Cat new];
+    c3.imagePath = @"https://images.pexels.com/photos/45170/kittens-cat-cat-puppy-rush-45170.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+    
+    _cats = @[
+      c1, c2, c3
+    ];
+    
+    
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -35,11 +43,6 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-/**
- -
- 
- */
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -47,22 +50,28 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _items.count;
+    return _cats.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
-    Item* item = [_items objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cat_cell" forIndexPath:indexPath];
+    Cat* currentCat = [_cats objectAtIndex:indexPath.row];
+    
+    UIImageView* ivCat = [cell viewWithTag: 1];
+//    ivCat.image = [UIImage imageNamed: currentCat.imagePath ];
+    
+    [ivCat sd_setImageWithURL:[NSURL URLWithString: currentCat.imagePath]
+                 placeholderImage:[UIImage imageNamed:@"cat2"]];
+    
+    
     // Configure the cell...
-    
-    cell.img.image =[UIImage imageNamed:item.imagePath];
-    
-    
     
     return cell;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 200;
+}
 
 /*
 // Override to support conditional editing of the table view.
